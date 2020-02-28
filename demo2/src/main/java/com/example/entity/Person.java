@@ -1,11 +1,12 @@
 package com.example.entity;
 
-public class Search {
+public class Person {
     private int id;
     private String spot;
     private String definiteSpot;
-    private String kind;
-    private String goodsname;
+    private String sex;
+    private String personname;
+    private String personage;
     private String selectdata;
     private String name;
     private String phonenumber;
@@ -39,20 +40,28 @@ public class Search {
         this.definiteSpot = definiteSpot;
     }
 
-    public String getKind() {
-        return kind;
+    public String getSex() {
+        return sex;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public String getGoodsname() {
-        return goodsname;
+    public String getPersonname() {
+        return personname;
     }
 
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname;
+    public void setPersonname(String personname) {
+        this.personname = personname;
+    }
+
+    public String getPersonage() {
+        return personage;
+    }
+
+    public void setPersonage(String personage) {
+        this.personage = personage;
     }
 
     public String getSelectdata() {
@@ -121,12 +130,13 @@ public class Search {
 
     @Override
     public String toString() {
-        return "Search{" +
+        return "Person{" +
                 "id=" + id +
                 ", spot='" + spot + '\'' +
                 ", definiteSpot='" + definiteSpot + '\'' +
-                ", kind='" + kind + '\'' +
-                ", goodsname='" + goodsname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", personname='" + personname + '\'' +
+                ", personage='" + personage + '\'' +
                 ", selectdata='" + selectdata + '\'' +
                 ", name='" + name + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +

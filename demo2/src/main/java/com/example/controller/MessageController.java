@@ -22,7 +22,7 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/allMessage", method = RequestMethod.POST)
-    public List<Map<String, Object>> addMessage(){
+    public List<Map<String, Object>> allMessage(){
         return service.getAllMessage();
     }
 }

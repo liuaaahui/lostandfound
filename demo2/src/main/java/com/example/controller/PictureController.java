@@ -13,7 +13,8 @@ public class PictureController {
     @RequestMapping("/add")
     @ResponseBody
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        String path = "C:\\Users\\Administrator\\Desktop\\img";
+//        String path = "C:\\Users\\Administrator\\Desktop\\img";
+        String path = "C:\\Users\\Administrator\\Desktop\\lostfound\\static\\img";
         String fileName = file.getOriginalFilename();
         Calendar currTime = Calendar.getInstance();
         String time = String.valueOf(currTime.get(Calendar.YEAR))+String.valueOf((currTime.get(Calendar.MONTH)+1));
@@ -33,8 +34,8 @@ public class PictureController {
                 e.printStackTrace();
                 return"上传失败";
             }
-            String fileUrl="../../../../";
-            fileUrl = fileUrl + "img/" + fileName;
+            String fileUrl="/static";
+            fileUrl = fileUrl + "/img/" + fileName;
             return fileUrl;
         }else{
             return "上传失败";

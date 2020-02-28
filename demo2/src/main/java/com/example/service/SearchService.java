@@ -8,4 +8,5 @@ import java.util.Map;
 public interface SearchService {
     int addSearch(Search search);
     List<Map<String, Object>> getAllSearch();
+    Search getSearchbyID(int id);
 }

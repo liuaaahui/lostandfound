@@ -1,6 +1,6 @@
 package com.example.entity;
 
-public class Search {
+public class Pet {
     private int id;
     private String spot;
     private String definiteSpot;
@@ -121,7 +121,7 @@ public class Search {
 
     @Override
     public String toString() {
-        return "Search{" +
+        return "Pet{" +
                 "id=" + id +
                 ", spot='" + spot + '\'' +
                 ", definiteSpot='" + definiteSpot + '\'' +
