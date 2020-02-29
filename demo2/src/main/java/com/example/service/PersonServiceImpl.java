@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public int addPerson(Person person) {
-        String sql = "insert into person (spot,definiteSpot,sex,personname,personage,selectdata,name,phonenumber,wechat,reward,remark,img,time) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql,person.getSpot(),person.getDefiniteSpot(),person.getSex(),person.getPersonname(),person.getPersonage(),person.getSelectdata(),person.getName(),person.getPhonenumber(),person.getWechat(),person.getReward(),person.getRemark(),person.getImg(),person.getTime());
+        String sql = "insert into person (spot,definiteSpot,sex,personname,personage,selectdata,name,phonenumber,wechat,reward,remark,img,time,user,title) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,person.getSpot(),person.getDefiniteSpot(),person.getSex(),person.getPersonname(),person.getPersonage(),person.getSelectdata(),person.getName(),person.getPhonenumber(),person.getWechat(),person.getReward(),person.getRemark(),person.getImg(),person.getTime(),person.getUser(),person.getTitle());
 
     }
 
@@ -40,6 +41,16 @@ public class PersonServiceImpl implements PersonService {
             person = personList.get(0);
         }
         return person;
+    }
+
+    @Override
+    public List<Person> getPersonbyuser(String user) {
+        String sql = "select * from person where user = ? ";
+        List<Person> personList = jdbcTemplate.query(sql, new Object[]{user}, new BeanPropertyRowMapper<Person>(Person.class));
+        if(null!=personList&&personList.size()>0){
+            Person person = personList.get(0);
+        }
+        return personList;
     }
 }
 
@@ -63,6 +74,8 @@ class PersonRowMapper implements RowMapper<Person> {
         person.setSpot(resultSet.getString("spot"));
         person.setTime(resultSet.getString("time"));
         person.setWechat(resultSet.getString("wechat"));
+        person.setUser(resultSet.getString("user"));
+        person.setTitle(resultSet.getString("title"));
         return person;
     }
 }

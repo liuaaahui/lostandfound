@@ -9,4 +9,5 @@ public interface MoneyService {
     int addMoney(Money money);
     List<Map<String, Object>> getAllMoney();
     Money getMoneybyID(int id);
+    List<Money> getMoneybyuser(String user);
 }

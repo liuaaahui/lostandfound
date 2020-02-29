@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.Search;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public int addSearch(Search search) {
-        String sql = "insert into search (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time) values (?,?,?,?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql,search.getSpot(),search.getDefiniteSpot(),search.getKind(),search.getGoodsname(),search.getSelectdata(),search.getName(),search.getPhonenumber(),search.getWechat(),search.getReward(),search.getRemark(),search.getImg(),search.getTime());
+        String sql = "insert into search (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time,user,title) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,search.getSpot(),search.getDefiniteSpot(),search.getKind(),search.getGoodsname(),search.getSelectdata(),search.getName(),search.getPhonenumber(),search.getWechat(),search.getReward(),search.getRemark(),search.getImg(),search.getTime(),search.getUser(),search.getTitle());
     }
 
     @Override
@@ -39,6 +40,16 @@ public class SearchServiceImpl implements SearchService {
             search = searchList.get(0);
         }
         return search;
+    }
+
+    @Override
+    public List<Search> getSearchbyuser(String user) {
+        String sql = "select * from search where user = ? ";
+        List<Search> searchList = jdbcTemplate.query(sql, new Object[]{user}, new BeanPropertyRowMapper<Search>(Search.class));
+        if(null!=searchList&&searchList.size()>0){
+            Search search = searchList.get(0);
+        }
+        return searchList;
     }
 }
 
@@ -60,6 +71,8 @@ class SearchRowMapper implements RowMapper<Search> {
         search.setSpot(resultSet.getString("spot"));
         search.setTime(resultSet.getString("time"));
         search.setWechat(resultSet.getString("wechat"));
+        search.setUser(resultSet.getString("user"));
+        search.setTitle(resultSet.getString("title"));
         return search;
     }
 }

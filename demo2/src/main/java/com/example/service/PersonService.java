@@ -9,4 +9,5 @@ public interface PersonService {
     int addPerson(Person person);
     List<Map<String, Object>> getAllPerson();
     Person getPersonbyID(int id);
+    List<Person> getPersonbyuser(String user);
 }

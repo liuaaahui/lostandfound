@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.entity.Person;
-import com.example.entity.Pet;
 import com.example.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +29,10 @@ public class PersonController {
     @GetMapping("/PersonbyID")
     public Person PersonbyID(int id){
         return service.getPersonbyID(id);
+    }
+
+    @GetMapping("/getPersonByuser")
+    public List<Person> getPersonbyuser(String user){
+        return service.getPersonbyuser(user);
     }
 }

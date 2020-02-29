@@ -30,4 +30,9 @@ public class MoneyController {
     public Money MoneybyID(int id){
         return service.getMoneybyID(id);
     }
+
+    @GetMapping("/getMoneyByuser")
+    public List<Money> getMoneybyuser(String user){
+        return service.getMoneybyuser(user);
+    }
 }

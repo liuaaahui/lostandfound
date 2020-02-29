@@ -9,4 +9,5 @@ public interface PetService {
     int addPet(Pet pet);
     List<Map<String, Object>> getAllPet();
     Pet getPetbyID(int id);
+    List<Pet> getPetbyuser(String user);
 }

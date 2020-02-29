@@ -30,4 +30,9 @@ public class SearchController {
     public Search SearchbyID(int id){
         return service.getSearchbyID(id);
     }
+
+    @GetMapping("/getSearchByuser")
+    public List<Search> getSearchbyuser(String user){
+        return service.getSearchbyuser(user);
+    }
 }

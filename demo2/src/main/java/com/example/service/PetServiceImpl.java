@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public int addPet(Pet pet) {
-        String sql = "insert into pet (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time) values (?,?,?,?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql,pet.getSpot(),pet.getDefiniteSpot(),pet.getKind(),pet.getGoodsname(),pet.getSelectdata(),pet.getName(),pet.getPhonenumber(),pet.getWechat(),pet.getReward(),pet.getRemark(),pet.getImg(),pet.getTime());
+        String sql = "insert into pet (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time,user,title) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,pet.getSpot(),pet.getDefiniteSpot(),pet.getKind(),pet.getGoodsname(),pet.getSelectdata(),pet.getName(),pet.getPhonenumber(),pet.getWechat(),pet.getReward(),pet.getRemark(),pet.getImg(),pet.getTime(),pet.getUser(),pet.getTitle());
     }
 
     @Override
@@ -39,6 +40,16 @@ public class PetServiceImpl implements PetService {
             pet = petList.get(0);
         }
         return pet;
+    }
+
+    @Override
+    public List<Pet> getPetbyuser(String user) {
+        String sql = "select * from pet where user = ? ";
+        List<Pet> petList = jdbcTemplate.query(sql, new Object[]{user}, new BeanPropertyRowMapper<Pet>(Pet.class));
+        if(null!=petList&&petList.size()>0){
+            Pet pet = petList.get(0);
+        }
+        return petList;
     }
 }
 
@@ -60,6 +71,8 @@ class PetRowMapper implements RowMapper<Pet> {
         pet.setSpot(resultSet.getString("spot"));
         pet.setTime(resultSet.getString("time"));
         pet.setWechat(resultSet.getString("wechat"));
+        pet.setUser(resultSet.getString("user"));
+        pet.setTitle(resultSet.getString("title"));
         return pet;
     }
 }

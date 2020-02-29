@@ -9,4 +9,5 @@ public interface SearchService {
     int addSearch(Search search);
     List<Map<String, Object>> getAllSearch();
     Search getSearchbyID(int id);
+    List<Search> getSearchbyuser(String user);
 }

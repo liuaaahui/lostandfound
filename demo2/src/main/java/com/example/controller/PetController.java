@@ -30,4 +30,9 @@ public class PetController {
     public Pet PetbyID(int id){
         return service.getPetbyID(id);
     }
+
+    @GetMapping("/getPetByuser")
+    public List<Pet> getPetbyuser(String user){
+        return service.getPetbyuser(user);
+    }
 }

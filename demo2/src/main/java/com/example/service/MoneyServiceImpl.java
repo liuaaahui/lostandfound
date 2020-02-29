@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.Money;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class MoneyServiceImpl implements MoneyService{
 
     @Override
     public int addMoney(Money money) {
-        String sql = "insert into money (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time) values (?,?,?,?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql,money.getSpot(),money.getDefiniteSpot(),money.getKind(),money.getGoodsname(),money.getSelectdata(),money.getName(),money.getPhonenumber(),money.getWechat(),money.getReward(),money.getRemark(),money.getImg(),money.getTime());
+        String sql = "insert into money (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time,user,title) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,money.getSpot(),money.getDefiniteSpot(),money.getKind(),money.getGoodsname(),money.getSelectdata(),money.getName(),money.getPhonenumber(),money.getWechat(),money.getReward(),money.getRemark(),money.getImg(),money.getTime(),money.getUser(),money.getTitle());
     }
 
     @Override
@@ -39,6 +40,16 @@ public class MoneyServiceImpl implements MoneyService{
             money = moneyList.get(0);
         }
         return money;
+    }
+
+    @Override
+    public List<Money> getMoneybyuser(String user) {
+        String sql = "select * from money where user = ? ";
+        List<Money> moneyList = jdbcTemplate.query(sql, new Object[]{user}, new BeanPropertyRowMapper<Money>(Money.class));
+        if(null!=moneyList&&moneyList.size()>0){
+            Money money = moneyList.get(0);
+        }
+        return moneyList;
     }
 }
 
@@ -60,6 +71,8 @@ class MoneyRowMapper implements RowMapper<Money> {
         money.setSpot(resultSet.getString("spot"));
         money.setTime(resultSet.getString("time"));
         money.setWechat(resultSet.getString("wechat"));
+        money.setUser(resultSet.getString("user"));
+        money.setTitle(resultSet.getString("title"));
         return money;
     }
 }

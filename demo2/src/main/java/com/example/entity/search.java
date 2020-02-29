@@ -14,6 +14,8 @@ public class Search {
     private String remark;
     private String img;
     private String time;
+    private String user;
+    private String title;
 
     public int getId() {
         return id;
@@ -119,6 +121,22 @@ public class Search {
         this.time = time;
     }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Search{" +
@@ -135,6 +153,8 @@ public class Search {
                 ", remark='" + remark + '\'' +
                 ", img='" + img + '\'' +
                 ", time='" + time + '\'' +
+                ", user='" + user + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }
