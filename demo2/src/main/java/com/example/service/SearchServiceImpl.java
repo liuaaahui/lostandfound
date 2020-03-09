@@ -19,9 +19,15 @@ public class SearchServiceImpl implements SearchService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public int addSearch(Search search) {
-        String sql = "insert into search (spot,definiteSpot,kind,goodsname,selectdata,name,phonenumber,wechat,reward,remark,img,time,user,title) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql,search.getSpot(),search.getDefiniteSpot(),search.getKind(),search.getGoodsname(),search.getSelectdata(),search.getName(),search.getPhonenumber(),search.getWechat(),search.getReward(),search.getRemark(),search.getImg(),search.getTime(),search.getUser(),search.getTitle());
+    public int addFirstKindSearch(Search search) {
+        String sql = "insert into search (spot,definiteSpot,kindOrSex,fillname,title,selectdata,contact,phonenumber,wechat,reward,remark,img,time,kind,user) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,search.getSpot(),search.getDefiniteSpot(),search.getKindOrSex(),search.getFillname(),search.getTitle(),search.getSelectdata(),search.getContact(),search.getPhonenumber(),search.getWechat(),search.getReward(),search.getRemark(),search.getImg(),search.getTime(),search.getKind(),search.getUser());
+    }
+
+    @Override
+    public int addSecondKindSearch(Search search) {
+        String sql = "insert into search (spot,definiteSpot,kindOrSex,fillname,personage,title,selectdata,contact,phonenumber,wechat,reward,remark,img,time,kind,user) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,search.getSpot(),search.getDefiniteSpot(),search.getKindOrSex(),search.getFillname(),search.getPersonage(),search.getTitle(),search.getSelectdata(),search.getContact(),search.getPhonenumber(),search.getWechat(),search.getReward(),search.getRemark(),search.getImg(),search.getTime(),search.getKind(),search.getUser());
     }
 
     @Override
@@ -29,6 +35,46 @@ public class SearchServiceImpl implements SearchService {
         String sql = "select * from search";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         return list;
+    }
+
+    @Override
+    public List<Search> getSearchbyFirstKind() {
+        String sql = "select * from search where kind = '失物招领' ";
+        List<Search> searchList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<Search>(Search.class));
+        if(null!=searchList&&searchList.size()>0){
+            Search search = searchList.get(0);
+        }
+        return searchList;
+    }
+
+    @Override
+    public List<Search> getSearchbySecondKind() {
+        String sql = "select * from search where kind = '寻物启事' ";
+        List<Search> searchList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<Search>(Search.class));
+        if(null!=searchList&&searchList.size()>0){
+            Search search = searchList.get(0);
+        }
+        return searchList;
+    }
+
+    @Override
+    public List<Search> getSearchbyThirdKind() {
+        String sql = "select * from search where kind = '寻宠启事' ";
+        List<Search> searchList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<Search>(Search.class));
+        if(null!=searchList&&searchList.size()>0){
+            Search search = searchList.get(0);
+        }
+        return searchList;
+    }
+
+    @Override
+    public List<Search> getSearchbyForthKind() {
+        String sql = "select * from search where kind = '寻人启事' ";
+        List<Search> searchList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<Search>(Search.class));
+        if(null!=searchList&&searchList.size()>0){
+            Search search = searchList.get(0);
+        }
+        return searchList;
     }
 
     @Override
@@ -51,6 +97,18 @@ public class SearchServiceImpl implements SearchService {
         }
         return searchList;
     }
+
+    @Override
+    public int deletebyID(int id) {
+        String sql = "delete from search where id = ?";
+        return jdbcTemplate.update(sql,id);
+    }
+
+    @Override
+    public int updatebyID(int id) {
+        String sql = "update search set finish = '已完成' where id = ?";
+        return jdbcTemplate.update(sql,id);
+    }
 }
 
 class SearchRowMapper implements RowMapper<Search> {
@@ -60,10 +118,10 @@ class SearchRowMapper implements RowMapper<Search> {
         Search search = new Search();
         search.setId(resultSet.getInt("id"));
         search.setDefiniteSpot(resultSet.getString("definiteSpot"));
-        search.setGoodsname(resultSet.getString("goodsname"));
+        search.setFillname(resultSet.getString("fillname"));
         search.setImg(resultSet.getString("img"));
         search.setKind(resultSet.getString("kind"));
-        search.setName(resultSet.getString("name"));
+        search.setContact(resultSet.getString("contact"));
         search.setPhonenumber(resultSet.getString("phonenumber"));
         search.setRemark(resultSet.getString("remark"));
         search.setReward(resultSet.getString("reward"));
@@ -73,6 +131,9 @@ class SearchRowMapper implements RowMapper<Search> {
         search.setWechat(resultSet.getString("wechat"));
         search.setUser(resultSet.getString("user"));
         search.setTitle(resultSet.getString("title"));
+        search.setPersonage(resultSet.getString("personage"));
+        search.setKindOrSex(resultSet.getString("kindOrSex"));
+        search.setFinish(resultSet.getString("finish"));
         return search;
     }
 }

@@ -4,18 +4,21 @@ public class Search {
     private int id;
     private String spot;
     private String definiteSpot;
-    private String kind;
-    private String goodsname;
+    private String kindOrSex;
+    private String fillname;
+    private String personage;
+    private String title;
     private String selectdata;
-    private String name;
+    private String contact;
     private String phonenumber;
     private String wechat;
     private String reward;
     private String remark;
     private String img;
     private String time;
+    private String kind;
     private String user;
-    private String title;
+    private String finish;
 
     public int getId() {
         return id;
@@ -41,20 +44,36 @@ public class Search {
         this.definiteSpot = definiteSpot;
     }
 
-    public String getKind() {
-        return kind;
+    public String getKindOrSex() {
+        return kindOrSex;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
+    public void setKindOrSex(String kindOrSex) {
+        this.kindOrSex = kindOrSex;
     }
 
-    public String getGoodsname() {
-        return goodsname;
+    public String getFillname() {
+        return fillname;
     }
 
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname;
+    public void setFillname(String fillname) {
+        this.fillname = fillname;
+    }
+
+    public String getPersonage() {
+        return personage;
+    }
+
+    public void setPersonage(String personage) {
+        this.personage = personage;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSelectdata() {
@@ -65,12 +84,12 @@ public class Search {
         this.selectdata = selectdata;
     }
 
-    public String getName() {
-        return name;
+    public String getContact() {
+        return contact;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getPhonenumber() {
@@ -121,6 +140,14 @@ public class Search {
         this.time = time;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
     public String getUser() {
         return user;
     }
@@ -129,12 +156,12 @@ public class Search {
         this.user = user;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFinish() {
+        return finish;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFinish(String finish) {
+        this.finish = finish;
     }
 
     @Override
@@ -143,18 +170,21 @@ public class Search {
                 "id=" + id +
                 ", spot='" + spot + '\'' +
                 ", definiteSpot='" + definiteSpot + '\'' +
-                ", kind='" + kind + '\'' +
-                ", goodsname='" + goodsname + '\'' +
+                ", kindOrSex='" + kindOrSex + '\'' +
+                ", fillname='" + fillname + '\'' +
+                ", personage='" + personage + '\'' +
+                ", title='" + title + '\'' +
                 ", selectdata='" + selectdata + '\'' +
-                ", name='" + name + '\'' +
+                ", contact='" + contact + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", reward='" + reward + '\'' +
                 ", remark='" + remark + '\'' +
                 ", img='" + img + '\'' +
                 ", time='" + time + '\'' +
+                ", kind='" + kind + '\'' +
                 ", user='" + user + '\'' +
-                ", title='" + title + '\'' +
+                ", finish='" + finish + '\'' +
                 '}';
     }
 }
