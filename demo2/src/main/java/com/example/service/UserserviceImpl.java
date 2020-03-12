@@ -3,12 +3,8 @@ package com.example.service;
 import com.example.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,21 +48,6 @@ public class UserserviceImpl implements UserService {
     }
 
     @Override
-//    public int addUser(User user) {
-//        String sql = "insert into user (username, password) values (?,?)";
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        int resRow = jdbcTemplate.update(new PreparedStatementCreator() {
-//            @Override
-//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-//                PreparedStatement ps = connection.prepareStatement(sql,new String[]{"id"});
-//                ps.setString(1,user.getUsername());
-//                ps.setString(2,user.getPassword());
-//                ps.setInt(3,user.getId());
-//                return ps;
-//            }
-//        },keyHolder);
-//        return Integer.parseInt(keyHolder.getKey().toString());
-//    }
     public int addUser(User user) {
         String sql = "insert into user (username, password, nickname) values (?,?,?)";
         return jdbcTemplate.update(sql, user.getUsername(),user.getPassword(),user.getNickname());
@@ -74,7 +55,7 @@ public class UserserviceImpl implements UserService {
 
     @Override
     public int deleteUser(int id) {
-        String sql = "delete from user where username = ?";
+        String sql = "delete from user where id = ?";
         return jdbcTemplate.update(sql,id);
     }
 

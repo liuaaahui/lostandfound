@@ -29,4 +29,14 @@ public class UserController {
         return service.isHasUser(user);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/showUser", method = RequestMethod.POST)
+    public List<User> showUser(){
+        return service.getAllUsers();
+    }
+
+    @GetMapping("/deleteUserbyID")
+    public int deleteUserbyID(int id){
+        return service.deleteUser(id);
+    }
 }

@@ -5,6 +5,8 @@ import com.example.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/report")
 public class ReportController {
@@ -16,5 +18,11 @@ public class ReportController {
     @RequestMapping(value = "/addReport", method = RequestMethod.POST)
     public int addReport(@RequestBody Report report){
         return service.addReport(report);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAllReport", method = RequestMethod.POST)
+    public List<Report> getAllReport(){
+        return service.getAllReport();
     }
 }
