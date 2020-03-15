@@ -6,4 +6,6 @@ import java.util.List;
 public interface ReportService {
     List<Report> getAllReport();
     int addReport(Report report);
+    int updatebyID(int id);
+    int deletebyID(int id);
 }

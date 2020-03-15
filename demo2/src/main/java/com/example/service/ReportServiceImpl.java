@@ -16,7 +16,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<Report> getAllReport() {
-        String sql = "select * from report";
+        String sql = "select * from report where finish = '0'";
         List<Report> reportList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<Report>(Report.class));
         if(null!=reportList&&reportList.size()>0){
             Report report = reportList.get(0);
@@ -26,7 +26,19 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public int addReport(Report report) {
-        String sql = "insert into report (phonenumber,informer) values (?,?)";
-        return jdbcTemplate.update(sql, report.getPhonenumber(),report.getInformer());
+        String sql = "insert into report (phonenumber,informer,time) values (?,?,?)";
+        return jdbcTemplate.update(sql, report.getPhonenumber(),report.getInformer(),report.getTime());
+    }
+
+    @Override
+    public int updatebyID(int id) {
+        String sql = "update report set finish = '1' where id = ?";
+        return jdbcTemplate.update(sql,id);
+    }
+
+    @Override
+    public int deletebyID(int id) {
+        String sql = "delete from report where id = ?";
+        return jdbcTemplate.update(sql,id);
     }
 }

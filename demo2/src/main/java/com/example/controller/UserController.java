@@ -39,4 +39,9 @@ public class UserController {
     public int deleteUserbyID(int id){
         return service.deleteUser(id);
     }
+
+    @GetMapping("/updatebyID")
+    public int updatebyID(String username){
+        return service.updatebyID(username);
+    }
 }

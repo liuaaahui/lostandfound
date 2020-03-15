@@ -25,4 +25,14 @@ public class ReportController {
     public List<Report> getAllReport(){
         return service.getAllReport();
     }
+
+    @GetMapping("/updatebyID")
+    public int updatebyID(int id){
+        return service.updatebyID(id);
+    }
+
+    @GetMapping("/deletebyID")
+    public int deletebyID(int id){
+        return service.deletebyID(id);
+    }
 }

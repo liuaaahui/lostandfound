@@ -19,7 +19,7 @@ public class UserserviceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        String sql = "select * from user";
+        String sql = "select id,username,password,nickname,(case status when '0' then '无' else '有' end)as status from user";
         List<User> userList = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<User>(User.class));
         if(null!=userList&&userList.size()>0){
             User user = userList.get(0);
@@ -94,6 +94,12 @@ public class UserserviceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public int updatebyID(String username) {
+        String sql = "update user set status = '0' where username = ?";
+        return jdbcTemplate.update(sql,username);
+    }
 }
 
 class UserRowMapper implements RowMapper<User> {
@@ -105,6 +111,7 @@ class UserRowMapper implements RowMapper<User> {
         user.setUsername(resultSet.getString("username"));
         user.setPassword(resultSet.getString("password"));
         user.setNickname(resultSet.getString("nickname"));
+        user.setStatus(resultSet.getString("status"));
         return user;
     }
 }

@@ -14,4 +14,5 @@ public interface UserService {
     int updateUser(User user);
     int isHasUserByusername(String username);
     List<User> isHasUser(User user);
+    int updatebyID(String username);
 }
